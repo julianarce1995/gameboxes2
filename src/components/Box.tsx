@@ -6,134 +6,135 @@ import {
   selectFirstId,
 } from 'src/store/selectors/firstSelector';
 import { selectSecColor, selectSecId } from 'src/store/selectors/secSelector';
-import { setFirstInfo } from 'src/store/slices/firstSlice';
-import { setSecInfo } from 'src/store/slices/secSlice';
-import { ColorBox } from 'src/types/colorType';
+import { setFirstBoxInfo } from 'src/store/slices/firstSlice';
+import { setSecBoxInfo } from 'src/store/slices/secSlice';
+import { ColorBlock } from 'src/types/colorType';
 
 import Block from './Block';
 import Column from './Column';
 
 const Box: FC = () => {
-  const [colorBox1, setColorBox1] = useState(ColorBox.YELLOW);
-  const [colorBox2, setColorBox2] = useState(ColorBox.BLUE);
-  const [colorBox3, setColorBox3] = useState(ColorBox.GRAY);
-  const [colorBox4, setColorBox4] = useState(ColorBox.RED);
-  const [colorBox5, setColorBox5] = useState(ColorBox.GRAY);
-  const [colorBox6, setColorBox6] = useState(ColorBox.GRAY);
-  const [selectedBox, setSelectedBox] = useState<string | undefined>(undefined);
-  //const [isSelected, setIsSelected] = useState(true);
-  const id1 = useAppSelector(selectFirstId);
-  const id2 = useAppSelector(selectSecId);
-  const color1 = useAppSelector(selectFirstColor);
-  const color2 = useAppSelector(selectSecColor);
-  let isSelected = 'selected';
+  const [colorBlock1, setColorBlock1] = useState(ColorBlock.YELLOW);
+  const [colorBlock2, setColorBlock2] = useState(ColorBlock.BLUE);
+  const [colorBlock3, setColorBlock3] = useState(ColorBlock.GRAY);
+  const [colorBlock4, setColorBlock4] = useState(ColorBlock.RED);
+  const [colorBlock5, setColorBlock5] = useState(ColorBlock.GRAY);
+  const [colorBlock6, setColorBlock6] = useState(ColorBlock.GRAY);
+  const [selected, setSelected] = useState<string>('');
+  const firstBoxIdSelected = useAppSelector(selectFirstId);
+  const secBoxIdSelected = useAppSelector(selectSecId);
+  const firstColorBlockSelected = useAppSelector(selectFirstColor);
+  const secColorBlockSeleceted = useAppSelector(selectSecColor);
 
   const dispatch = useAppDispatch();
 
-  function handleClick(colorBox: ColorBox, id: string) {
-    if (!id1) {
-      dispatch(setFirstInfo({ colorBox, id, isSelected }));
-      setSelectedBox(id);
-    } else if (id1 && id !== id1 && !id2) {
-      dispatch(setSecInfo({ colorBox, id, isSelected }));
-      setSelectedBox('');
+  function handleClick(colorBlock: ColorBlock, id: string) {
+    if (!firstBoxIdSelected) {
+      dispatch(setFirstBoxInfo({ colorBlock, id, selected }));
+      setSelected(id);
+    } else if (
+      firstBoxIdSelected &&
+      id !== firstBoxIdSelected &&
+      !secBoxIdSelected
+    ) {
+      dispatch(setSecBoxInfo({ colorBlock, id, selected }));
+      setSelected('');
     } else {
-      dispatch(setFirstInfo({ colorBox, id, isSelected }));
-      setSelectedBox(id);
-      dispatch(setSecInfo({ colorBox: undefined, id: '', isSelected: '' }));
+      dispatch(setFirstBoxInfo({ colorBlock, id, selected }));
+      setSelected(id);
+      dispatch(setSecBoxInfo({ colorBlock: undefined, id: '', selected: '' }));
     }
   }
   useEffect(() => {
-    if (id1 && id2) {
-      switch (id1) {
+    if (firstBoxIdSelected && secBoxIdSelected) {
+      switch (firstBoxIdSelected) {
         case '1':
-          setColorBox1(color2 as ColorBox);
+          setColorBlock1(secColorBlockSeleceted as ColorBlock);
           break;
         case '2':
-          setColorBox2(color2 as ColorBox);
+          setColorBlock2(secColorBlockSeleceted as ColorBlock);
           break;
         case '3':
-          setColorBox3(color2 as ColorBox);
+          setColorBlock3(secColorBlockSeleceted as ColorBlock);
           break;
         case '4':
-          setColorBox4(color2 as ColorBox);
+          setColorBlock4(secColorBlockSeleceted as ColorBlock);
           break;
         case '5':
-          setColorBox5(color2 as ColorBox);
+          setColorBlock5(secColorBlockSeleceted as ColorBlock);
           break;
         case '6':
-          setColorBox6(color2 as ColorBox);
+          setColorBlock6(secColorBlockSeleceted as ColorBlock);
           break;
         default:
           break;
       }
-      switch (id2) {
+      switch (secBoxIdSelected) {
         case '1':
-          setColorBox1(color1 as ColorBox);
+          setColorBlock1(firstColorBlockSelected as ColorBlock);
           break;
         case '2':
-          setColorBox2(color1 as ColorBox);
+          setColorBlock2(firstColorBlockSelected as ColorBlock);
           break;
         case '3':
-          setColorBox3(color1 as ColorBox);
+          setColorBlock3(firstColorBlockSelected as ColorBlock);
           break;
         case '4':
-          setColorBox4(color1 as ColorBox);
+          setColorBlock4(firstColorBlockSelected as ColorBlock);
           break;
         case '5':
-          setColorBox5(color1 as ColorBox);
+          setColorBlock5(firstColorBlockSelected as ColorBlock);
           break;
         case '6':
-          setColorBox6(color1 as ColorBox);
+          setColorBlock6(firstColorBlockSelected as ColorBlock);
           break;
         default:
           break;
       }
     }
-  }, [selectedBox, id2]);
-  useEffect(() => {}, [id1, id2]);
+  }, [secBoxIdSelected]);
 
   return (
     <div className="box">
       <Column>
         <Block
           id="1"
-          colorBox={colorBox1}
-          selected={selectedBox}
+          colorBlock={colorBlock1}
+          selected={selected}
           handleClick={handleClick}
         />
         <Block
           id="2"
-          colorBox={colorBox2}
-          selected={selectedBox}
+          colorBlock={colorBlock2}
+          selected={selected}
           handleClick={handleClick}
         />
         <Block
           id="3"
-          colorBox={colorBox3}
-          selected={selectedBox}
+          colorBlock={colorBlock3}
+          selected={selected}
           handleClick={handleClick}
         />
       </Column>
       <Column>
         <Block
           id="4"
-          colorBox={colorBox4}
-          selected={selectedBox}
+          colorBlock={colorBlock4}
+          selected={selected}
           handleClick={handleClick}
         />
         <Block
           id="5"
-          colorBox={colorBox5}
-          selected={selectedBox}
+          colorBlock={colorBlock5}
+          selected={selected}
           handleClick={handleClick}
         />
       </Column>
       <Column>
         <Block
           id="6"
-          colorBox={colorBox6}
-          selected={selectedBox}
+          colorBlock={colorBlock6}
+          selected={selected}
           handleClick={handleClick}
         />
       </Column>

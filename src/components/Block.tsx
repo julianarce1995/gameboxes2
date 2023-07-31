@@ -1,25 +1,20 @@
 import { type FC } from 'react';
 
-import { ColorBox } from 'src/types/colorType';
+import { ColorBlock } from 'src/types/colorType';
 
-interface AdminAppBarProps {
-  colorBox: ColorBox;
+interface BlockProps {
+  colorBlock: ColorBlock;
   id: string;
   selected?: string;
-  handleClick: (colorBox: ColorBox, id: string) => void;
+  handleClick: (colorBlock: ColorBlock, id: string) => void;
 }
 
-const Block: FC<AdminAppBarProps> = ({
-  colorBox,
-  id,
-  selected,
-  handleClick,
-}) => {
+const Block: FC<BlockProps> = ({ colorBlock, id, selected, handleClick }) => {
   return (
     <div
       id={id}
-      onClick={() => handleClick(colorBox, id)}
-      className={selected === id ? colorBox + ' ' + 'selected' : colorBox}
+      onClick={() => handleClick(colorBlock, id)}
+      className={selected === id ? colorBlock + ' ' + 'selected' : colorBlock}
     ></div>
   );
 };

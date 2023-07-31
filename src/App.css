@@ -1,3 +1,7 @@
+.box {
+  display: flex;
+}
+
 .column {
   display: flex;
   flex-direction: column-reverse;
@@ -29,14 +33,4 @@
 }
 .gray {
   background-color: rgb(99, 99, 101);
-}
-
-.game {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.box {
-  display: flex;
 }

@@ -1,16 +1,16 @@
 import { type Reducer, configureStore } from '@reduxjs/toolkit';
 
-import firstReducer, { ColorState } from './slices/firstSlice';
+import firstReducer, { BlockState } from './slices/firstSlice';
 import secReducer from './slices/secSlice';
 
 export interface RootReducer {
-  color1: Reducer<ColorState>;
-  color2: Reducer<ColorState>;
+  firstBlock: Reducer<BlockState>;
+  secBlock: Reducer<BlockState>;
 }
 
 export const rootReducer: RootReducer = {
-  color1: firstReducer,
-  color2: secReducer,
+  firstBlock: firstReducer,
+  secBlock: secReducer,
 };
 
 const store = configureStore({

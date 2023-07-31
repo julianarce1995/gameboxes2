@@ -1,39 +1,39 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { ColorBox } from 'src/types/colorType';
+import { ColorBlock } from 'src/types/colorType';
 
-export interface ColorState {
-  colorBox?: ColorBox;
+export interface BlockState {
+  colorBlock?: ColorBlock;
   id?: string;
-  isSelected?: string;
+  selected?: string;
 }
 
-const initialState: ColorState = {
-  colorBox: undefined,
+const initialState: BlockState = {
+  colorBlock: undefined,
   id: undefined,
-  isSelected: undefined,
+  selected: undefined,
 };
 
 const colorSlice = createSlice({
   name: 'color',
   initialState,
   reducers: {
-    setFirstInfo: (
+    setFirstBoxInfo: (
       state,
       action: PayloadAction<{
-        colorBox: ColorBox;
+        colorBlock: ColorBlock;
         id: string;
-        isSelected: string;
+        selected: string;
       }>,
     ) => {
-      state.colorBox = action.payload.colorBox;
+      state.colorBlock = action.payload.colorBlock;
       state.id = action.payload.id;
-      state.isSelected = action.payload.isSelected;
+      state.selected = action.payload.selected;
       return state;
     },
   },
 });
 
 const { reducer, actions } = colorSlice;
-export const { setFirstInfo } = actions;
+export const { setFirstBoxInfo } = actions;
 export default reducer;
